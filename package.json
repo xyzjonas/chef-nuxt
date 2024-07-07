@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --dotenv .env.local",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "@vueuse/core": "^10.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "nuxt": "^3.12.3",
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@iconify-json/hugeicons": "^1.1.0",
+    "@unocss/nuxt": "^0.61.2",
+    "@unocss/preset-icons": "^0.61.2"
+  }
+}
