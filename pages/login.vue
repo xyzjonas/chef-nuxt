@@ -1,50 +1,72 @@
 <template>
-  <ui-card class="mx-auto card">
-    <form class="form-wrapper-form" @submit.prevent="onLogin">
-      <img src="/favicon.ico" alt="app_logo">
-      <h1 class="text-2xl uppercase">Nuxt App</h1>
-      <div class="flex flex-col gap-2 my-10">
-        <input class="" placeholder="username" v-model="username" type="text" :required="true" />
-        <input class="" placeholder="password" v-model="password" type="password" :required="true" />
-        <span class="flex items-center">
-          <input type="checkbox" checked disabled>
-          <span class="ml-2">keep logged in</span>
-        </span>
-      </div>
-      <ui-button :loading="loading" icon="i-hugeicons-login-01" color="primary">login</ui-button>
-      </form>
-      <div class="flex flex-col items-center mt-5">
-        <span>or</span>
-        <ui-button class="underline" link @click="navigateTo({ path: '/' });">continue without login</ui-button>
-      </div>
+  <ui-card flat class="mx-auto">
+    <div class="form-wrapper-form">
+    <img src="/favicon.ico" alt="app_logo" width="64px"/>
+    <h1 class="text-2xl uppercase font-title text-6xl">Chef</h1>
+    <div class="flex flex-col gap-2 my-10">
+      <client-only>
+        <Vueform
+          ref="form$"
+          size="lg"
+          :display-errors="false"
+          :endpoint="false"
+          @submit="async () => await onLogin()"
+        >
+          <TextElement
+            name="username"
+            placeholder="Username"
+            default="chef"
+            :rules="['required']"
+          />
+          <TextElement
+            name="password"
+            input-type="password"
+            placeholder="Password"
+            :rules="['required']"
+          />
+          <button submit hidden></button>
+        </Vueform>
+      </client-only>
+    </div>
+    <ui-button @click="onLogin" :loading="loading" icon="i-hugeicons-login-01" color="primary">login</ui-button
+    >
+    </div>
+    <div class="flex flex-col items-center mt-5">
+      <span>or</span>
+      <ui-button class="underline" link @click="navigateTo({ path: '/' })"
+        >continue without login</ui-button
+      >
+    </div>
   </ui-card>
 </template>
 <script setup lang="ts">
+import type { VueformElement } from '@vueform/vueform'
+
+interface Login {
+  username: string;
+  password: string;
+}
+
 const { loading, login, clear } = useLogin();
-const username = ref<string>("");
-const usernameInput = ref<HTMLInputElement | null>(null);
-const password = ref<string>("");
-const passwordInput = ref<HTMLInputElement | null>(null);
+
+const form$ = ref<null | VueformElement>(null);
 
 const onLogin = async () => {
-  await login(username.value, password.value);
-  navigateTo({ path: "/" });
+  if (!form$.value) {
+    return
+  }
+  await form$.value.validate()
+  if (!form$.value.hasErrors) {
+    const data = form$.value.data as Login;
+    await login(data.username, data.password);
+    navigateTo({ path: "/" });
+  }
 };
 
-onMounted(() => {
-  clear();
-  [usernameInput, passwordInput].forEach((_ref) => {
-    _ref.value?.addEventListener("focus", () => {
-      document.querySelector(`[for='${_ref.value?.id}']`)?.classList?.add("active");
-    });
 
-    _ref.value?.addEventListener("focusout", () => {
-      if (!_ref.value?.value) {
-        document.querySelector(`[for='${_ref.value?.id}']`)?.classList?.remove("active");
-      }
-    });
-  });
-});
+useHead({
+  title: "Chef | Login",
+})
 </script>
 <style lang="css" scoped>
 .form-wrapper-form {

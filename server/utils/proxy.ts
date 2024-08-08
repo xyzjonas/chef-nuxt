@@ -57,6 +57,34 @@ class ChefProxy {
     
   }
 
+  public async put(path: string, payload: any) {
+    const url = joinUrl(apiUrl, path);
+    console.debug(`PUT ${url}`);
+    try {
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new ProxyError(response.status, `Proxy query failed with status ${response.status}, ${response.statusText}`)
+      }
+
+      return await response.json();
+
+    } catch(err: unknown) {
+      if (!(err as ProxyError).statusCode) {
+        throw new ProxyError(503, `Fetch error, service at ${url} not available`)
+      } else {
+        throw err;
+      }
+    }
+  }
+
   public async post(path: string) {
     throw new Error("Not implemented!");
   }

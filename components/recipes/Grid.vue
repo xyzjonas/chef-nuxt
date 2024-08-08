@@ -144,7 +144,7 @@ const toggleFilter = (tagName: string) => {
 #search {
   font-size: large;
   padding: 1rem;
-  border: 1px solid var(--text-100);
+  border: 1px solid var(--border-100);
   border-radius: 0.4rem;
   outline: none;
   box-shadow: none;

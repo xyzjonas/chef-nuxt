@@ -1,7 +1,12 @@
 import { ofetch } from 'ofetch'
 import type { FetchOptions } from 'ofetch'
 
-export async function wrappedFetch<T>(url: string, options?: FetchOptions): Promise<T> {
+interface MyFetchOptions extends FetchOptions {
+  skipNotification?: boolean;
+  customNotification?: AddNotification;
+}
+
+export async function wrappedFetch<T>(url: string, options?: MyFetchOptions): Promise<T> {
 
   const { addNotification } = useNotifications();
 
@@ -9,11 +14,16 @@ export async function wrappedFetch<T>(url: string, options?: FetchOptions): Prom
   try {
     return await customFetch(url, { ...options })
   } catch (err: unknown) {
-    addNotification({
-      level: "error",
-      title: "Network Error",
-      text: `${err}` ?? "Something wrong happened",
-    }, 3000)
+    if (options?.skipNotification) {}
+    else if (options && options.customNotification) {
+      addNotification(options.customNotification, 3000)
+    } else {
+      addNotification({
+        level: "error",
+        title: "Network Error",
+        text: `${err}` ?? "Something wrong happened",
+      }, 3000)
+    }
     throw err;
   }
 

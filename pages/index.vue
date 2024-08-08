@@ -19,7 +19,10 @@
 
 <script setup lang="ts">
 import type { RecipeListItem } from "@/types";
-import { handleError } from "vue";
+
+useHead({
+  title: "Recipes",
+})
 
 const { data: recipes, error } = await useFetch<RecipeListItem[]>("/api/recipes")
 

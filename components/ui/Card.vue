@@ -5,6 +5,7 @@
       'body': true,
       'h-full' : true,
       transparent,
+      'box-shadow': !flat,
     }">
       <slot></slot>
     </div>
@@ -15,6 +16,7 @@
 interface Props {
   backgroundImage?: string;
   transparent?: boolean;
+  flat?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -26,7 +28,6 @@ const background = computed(() => `url('${props.backgroundImage}')`);
   border-radius: .5rem;
   background-color: var(--bg-200);
   box-sizing: border-box;
-  box-shadow: 0 10px 40px -12px var(--border-100);
   border: 1px solid var(--border-100);
   overflow: hidden;
 }
@@ -40,6 +41,10 @@ const background = computed(() => `url('${props.backgroundImage}')`);
   overflow: hidden;
 }
 
+.box-shadow {
+  box-shadow: 0 10px 40px -12px var(--border-100);
+}
+
 .body {
   background-color: var(--bg-200);
   padding: 1rem;
@@ -47,5 +52,6 @@ const background = computed(() => `url('${props.backgroundImage}')`);
 
 .transparent {
   background-color: transparent;
+  box-shadow: none;
 }
 </style>

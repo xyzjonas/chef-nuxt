@@ -15,7 +15,9 @@ export default defineConfig({
     presetWebFonts({
       provider: 'bunny',
       fonts: {
-        sans: 'Poppins:200,300,400,500,600'
+        sans: 'Poppins:200,300,400,500,600',
+        // title: 'Bungee Inline',
+        title: 'Monoton',
       }
     }),
   ]

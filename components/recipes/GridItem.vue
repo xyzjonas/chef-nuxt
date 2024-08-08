@@ -3,7 +3,7 @@
     <p class="title">{{ recipe.title?.toUpperCase() }}</p>
     <p class="subtitle">{{ recipe.subtitle }}</p>
     <div class="flex flex-wrap gap-1 mt-2">
-      <ui-pin v-for="tag in recipe.tags" :text="tag.name" size="small" color="#a8f2cd"/>
+      <ui-pin v-for="tag in recipe.tags" :text="tag.name" size="small" color="var(--primary-100)"/>
     </div>
   </ui-card>
 </template>

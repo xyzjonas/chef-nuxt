@@ -42,7 +42,7 @@ const textColor = computed(() => {
   border: 1px solid v-bind('border');
   padding: .1rem .4rem;
   border-radius: 2rem;
-  transition: .3s ease-in-out;
+  transition: .1s ease-in-out;
 
   background-color: v-bind('bg');
   color: v-bind('textColor');
@@ -56,7 +56,7 @@ const textColor = computed(() => {
 .clickable {
   cursor: pointer;
   &:hover {
-    filter: brightness(1.2);
+    border-color: var(--primary-100);
   }
 }
 </style>

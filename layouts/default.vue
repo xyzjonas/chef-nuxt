@@ -5,9 +5,9 @@
     <main class="page mt-2 mb-10">
       <slot></slot>
     </main>
-   
+
     <layout-foot class="footer" />
-    
+
     <div class="notification-drawer">
       <TransitionGroup name="slide">
         <div v-for="notif in notifications" :key="notif.created.toISOString()">
@@ -42,9 +42,10 @@ const { notifications } = useNotifications();
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   bottom: 0;
   width: 100%;
+  z-index: 9999;
 }
 
 .slide-enter-active,

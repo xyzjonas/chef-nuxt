@@ -54,7 +54,7 @@ const icon = computed(() => {
 }
 
 .success {
-  background-color: var(--primary-100);
+  background-color: var(--success-100);
   color: var(--text-over-primary);
 }
 

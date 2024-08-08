@@ -1,5 +1,5 @@
 <template>
-  <button :class="clazz" :disabled="disabled || loading">
+  <button :class="clazz" :disabled="disabled || loading" :type="submit ? 'submit' : 'button'">
     <ui-spinner name="spinner" v-if="loading" />
     <i v-if="!loading && icon" :class="icon"></i>
     <slot v-if="!loading" />
@@ -19,6 +19,7 @@ const props = defineProps<{
   squared?: boolean;
   link?: boolean;
   breakLine?: boolean;
+  submit?: boolean;
   color?: "primary" | "secondary" | "light" | "success" | "danger";
 }>();
 
@@ -105,10 +106,14 @@ button:hover {
   color: var(--text-over-secondary);
 }
 
+.secondary:hover {
+  filter: brightness(0.9);
+}
+
 .danger {
-  background-color: var(--color-danger);
+  background-color: var(--error-100);
   color: var(--text-over-danger);
-  border-color: var(--color-danger);
+  border-color: var(--error-100);
 }
 
 .link {
@@ -121,7 +126,7 @@ button:hover {
 }
 
 .success {
-  background-color: var(--color-success);
+  background-color: var(--success-100);
   border-color: var(--color-success);
   color: var(--bg-200);
 }
@@ -139,8 +144,12 @@ button:hover {
 
 .outlined {
   background-color: transparent;
-  border: 1px solid var(--border-100) !important;
+  border: 1px solid var(--text-100) !important;
   color: var(--text-100);
+
+  &:hover {
+    background-color: var(--secondary-100);
+  }
 }
 
 button[disabled] {

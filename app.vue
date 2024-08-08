@@ -1,5 +1,5 @@
 <template>
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator color="white" :height="5"/>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
@@ -32,16 +32,15 @@ useHead({
 <style lang="css">
 :root {
     
-    --primary-100:#2cbd83;
-    --primary-200:#d2f9e4;
+    /* --primary-100:#2cbd83; */
+    --primary-100:#d35459;
+    /* --primary-200:#d2f9e4; */
+    --primary-200:#ffebe8;
     --accent-100:#2C3E50;
     --accent-200:#b4c7dd;
-    
-    --color-success: var(--primary-100);
-    --color-danger: #9B1C31;
 
-    --success-100: var(--color-success);
-    --error-100: var(--color-danger);
+    --success-100: #2cbd83;
+    --error-100: #9B1C31;
 
     --input-border: var(--color-grey-dark-1);
     --input-focus-h: 245;
@@ -65,13 +64,14 @@ useHead({
     --bg-300:#adadad;
 
     --border-100: #e2e8f0;
+    --border-200: #9a9a9a;
 
     --text-100: var(--text-black);
-    --text-over-secondary: #ffffff;
 
     --shadow-100: #141414;
 
-    --secondary-100: #0f172a;
+    --secondary-100: #edeff2;
+    --text-over-secondary: var(--text-100);
 }
 
 html[data-theme="dark"] {
@@ -80,6 +80,7 @@ html[data-theme="dark"] {
     --bg-300:#404040;
 
     --border-100: #202020;
+    --border-200: #9a9a9a;
 
     --text-100: var(--text-white);
     --text-over-secondary: #e0e0e0;
@@ -87,6 +88,17 @@ html[data-theme="dark"] {
     --shadow-100: #585858;
 
     --secondary-100: #404040;
+}
+
+/* VueForm overrides */
+:root, :before, :after, * {
+  --vf-border-color-input: var(--border-100) !important;
+  --vf-bg-input: var(--bg-100) !important;
+  --vf-color-input: var(--text-100) !important;
+  --vf-primary: var(--primary-100) !important;
+  --vf-primary-darker: var(--primary-100) !important;
+  --vf-bg-selected: var(--bg-200) !important;
+  --vf-ring-width: 0px !important;
 }
 
 a {
@@ -127,6 +139,7 @@ body {
 *::before,
 *::after {
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 .page-enter-active,
@@ -139,6 +152,16 @@ body {
   filter: blur(1rem);
 }
 
+hr {
+  border-bottom: none;
+  margin-block: 1.5rem;
+  border-color: var(--border-200);
+}
+
+.content {
+  background-color: var(--bg-100);
+}
+
 .content h1 {
   font-size: 2.5rem;
   line-height: 2.5rem;
@@ -146,18 +169,13 @@ body {
   text-transform: uppercase;
 }
 
-hr {
-  border-bottom: none;
-  margin-block: 1.5rem;
-  border-color: var(--border-100);
-}
 
 .content blockquote {
   background-color: var(--bg-200);
   padding: 1.5rem;
-  margin-block: 0.5rem;
+  margin-block: 1rem;
   border: 1px solid var(--border-100);
-  box-shadow: 0 10px 20px -12px var(--border-100);
+  /* box-shadow: 0 10px 20px -12px var(--border-100); */
   border-radius: .3rem;
 }
 
@@ -173,26 +191,47 @@ hr {
 .content ol, .content ul {
   margin: 0;
   padding: 0;
-  padding-left: 0.5rem;
+  padding-left: 0;
 }
 
 .content ol {
-  list-style: decimal-leading-zero;
-  list-style-position: inside;
-  
+  list-style: none;
+  list-style-position: outside
 }
 
 .content ul {
-  padding-left: 2rem;
+  padding-left: 2.5rem;
 }
 
 .content ol li {
   margin-block: 1rem;
 }
 
-.content li::marker {
+/* .content li::marker {
   font-weight: 500;
   font-size: 1.5rem;
-  
+  font-family: monospace;
+} */
+
+.content li::before {
+  content: counter(list-item);
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: .5rem;
+  display: grid;
+  align-content: center;
+  width: fit-content;
+  margin-bottom: .5rem;
+  height: 3rem;
+  text-align: center;
+  aspect-ratio: 1;
+  border-bottom: 2px solid var(--border-200);
+  color: var(--border-200);
 }
+
+.content a {
+  text-decoration: underline;
+  color: var(--primary-100);
+}
+
 </style>

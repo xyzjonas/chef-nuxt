@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 const SECRET_KEY = process.env.SECRET_KEY as string;
 const EXPIRES_SECONDS = parseInt(process.env.EXPIRES_SECONDS ?? "3600");
 
+console.info(EXPIRES_SECONDS)
+
 export interface User {
   id: number;
   email: string;
