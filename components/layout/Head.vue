@@ -2,7 +2,7 @@
   <header>
       <div class="page flex p-2 items-center">
         <ui-button color="primary" @click="navigateTo('/')">
-          <img src="/favicon.ico" width="32px">
+          <img src="/logo.svg" width="32px" class="rounded-full">
         <span class="transform-translate-y-[2px] font-title text-2xl">CHEF</span>
         </ui-button>
         <span class="ml-auto text-xs">{{ VERSION }}</span>

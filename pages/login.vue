@@ -1,7 +1,7 @@
 <template>
   <ui-card flat class="mx-auto">
     <div class="form-wrapper-form">
-    <img src="/favicon.ico" alt="app_logo" width="64px"/>
+    <img src="/logo.svg" alt="app_logo" width="64px" class="rounded-full mb-2">
     <h1 class="text-2xl uppercase font-title text-6xl">Chef</h1>
     <div class="flex flex-col gap-2 my-10">
       <client-only>

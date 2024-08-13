@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <NuxtLoadingIndicator color="white" :height="5"/>
   <NuxtLayout>
     <NuxtPage />
@@ -213,7 +214,7 @@ hr {
   font-family: monospace;
 } */
 
-.content li::before {
+.content ol li::before {
   content: counter(list-item);
   font-weight: 500;
   font-size: 1.2rem;

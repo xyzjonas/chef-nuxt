@@ -7,12 +7,12 @@
             <FormStep
               name="details"
               :elements="[
+                'tags',
                 'title',
                 'subtitle',
                 'source',
                 'source_name',
                 'counter',
-                'tags',
               ]"
               >Details</FormStep
             >
@@ -28,6 +28,19 @@
             >
           </FormSteps>
           <FormElements>
+            <TagsElement
+              name="tags"
+              size="lg"
+              placeholder="tags"
+              object
+              value-prop="name"
+              label-prop="name"
+              create
+              search
+              :strict="false"
+              :native="false"
+              :items="getTagsOptions"
+            />
             <TextElement
               size="lg"
               name="title"
@@ -51,19 +64,7 @@
               />
             </StaticElement>
 
-            <TagsElement
-              name="tags"
-              size="lg"
-              placeholder="tags"
-              object
-              value-prop="name"
-              label-prop="name"
-              create
-              search
-              :strict="false"
-              :native="false"
-              :items="getTagsOptions"
-            />
+            
             <ListElement name="ingredients" :sort="true">
               <template #default="{ index }" addClass="content">
                 <ObjectElement :name="index" class="card">
